@@ -1,0 +1,4 @@
+package: .
+import:
+- package: github.com/Masterminds/cookoo
+  version: ^1.3.0
