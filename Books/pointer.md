@@ -56,9 +56,9 @@ func setCar(carList carListType) {
 pointer 和 value 类型作为 receiver 有什么区别？主要在于你是否需要修改receiver，有如下几个注意事项：
 * 如果你需要修改receiver，那必须是pointer；
 * 因为 slice 和 map 是引用类型，因此这里有点微妙，他们以value作为 receiver 是可以修改receiver 的，但是如果要修改自身熟悉，比如slice的长度，那还是需要以pointer作为receiver；
-* 如何receiver很大，例如一个很大的结构，那么 pointer receiver性能会更佳。可以参考[从内存分配策略(堆、栈)的角度分析,函数传递指针真的比传值效率高吗？](./escape.md)；
+* 如果receiver很大，例如一个很大的结构，那么 pointer receiver性能会更佳。可以参考[从内存分配策略(堆、栈)的角度分析,函数传递指针真的比传值效率高吗？](./escape.md)；
 * 官方建议如果类型的某些方法具有 pointer receiver，那么其余的方法也保持一致，[使得方法集一致](https://golang.org/doc/faq#Should)；
-* 对于基础类型、小型slice、map之类，除非强制要求，否则使用value receiver的将很高效和清晰
+* 对于基础类型、小型slice、map之类，除非强制要求，否则使用value receiver的将很高效和清晰。
 
 ```
 package main
