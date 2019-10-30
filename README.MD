@@ -65,3 +65,4 @@
 * [《Go 指南》](https://go.openset.wang/)
 
 * [新版本Golang的包管理入门教程](https://juejin.im/post/5c9c8c4fe51d450bc9547ba1)
+* [一个专家眼中的Go与Java垃圾回收算法大对比](https://www.dushibaiyu.com/2016/12/java-go-gc.html)
