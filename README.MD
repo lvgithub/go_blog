@@ -22,6 +22,7 @@
 ## 进阶思考
 * [Go中两种声明变量方式，有什么区别？](./Books/variable.md)
 * [深入 Go 并发模型:Context](./Books/context.md)
+* [GC（垃圾回收）必须Stop-the-world？](./Books/garbageCollection.md)
 ## 实践
 * Golang 使用MySQL
 * Golang 使用Kafka
