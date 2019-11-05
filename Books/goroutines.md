@@ -1,7 +1,7 @@
 为什么要使用 goroutines 取代 threads
 
 ## 介绍
-goroutines 和 threads 都是为了并发而生。准备的说，并不能说 goroutines 取代 threads。因为其实 goroutines 是建立在一组 threads 之上。将多路并发执行的能力复用在 threads 组上。当某一个 goroutine 需要运行时，会自动将它挂载到一个 thread 上。而且这一系列的调度对开发者是黑盒，无感知的。
+goroutines 和 threads 都是为了并发而生。准确的说，并不能说 goroutines 取代 threads。因为其实 goroutines 是建立在一组 threads 之上。将多路并发执行的能力复用在 threads 组上。当某一个 goroutine 需要运行时，会自动将它挂载到一个 thread 上。而且这一系列的调度对开发者是黑盒，无感知的。
 
 
 ## goroutines 对比 threads 的优势
@@ -80,5 +80,5 @@ main goroutine
 |---|-----|-----|-----|------|------|------|------|------|------|------|
 |   | a   |1    | b   | 2    |  c   | 3    |d     |4(e)  |  5   |      |
 
-
-
+#参考
+[Part 21: Goroutines](https://golangbot.com/goroutines/)
