@@ -7,9 +7,7 @@
 * [第一个程序](./Books/hello.md)
 * [第一个包](./Books/package.md)
 * [使用 go modules 进行包管理](./Books/go_modules.md)
-* [深入理解 string](./Books/string.md)
-* [深入理解 slice](./Books/slice.md)
-* [深入理解 interface](./Books/interface.md)
+
 * [Go的反射]()
 * [channel解决什么问题]()
 * [深度剖析channel](http://shanks.leanote.com/post/%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90channel)
@@ -20,10 +18,20 @@
 * 进行性能测试
 
 ## 进阶思考
+
+* [深入理解 string](./Books/string.md)
+* [深入理解 slice](./Books/slice.md)
+* [深入理解 Golang 指针](./Books/pointer.md)
+* [深入理解 interface](./Books/interface.md)
+
+* [通过 深入对比 Arrays 和 Slices 学习GO](./Books/array_slice.md)
+* [为什么要使用 goroutines 取代 threads](./Books/goroutines.md)
 * [Go中两种声明变量方式，有什么区别？](./Books/variable.md)
 * [深入 Go 并发模型:Context](./Books/context.md)
 * [GC（垃圾回收）必须Stop-the-world？](./Books/garbageCollection.md)
 * [是在堆还是堆栈上分配了变量?传递指针真的比传值效率高吗？](./Books/variableAllocated.md)
+
+
 ## 实践
 * Golang 使用MySQL
 * Golang 使用Kafka
@@ -68,3 +76,4 @@
 
 * [新版本Golang的包管理入门教程](https://juejin.im/post/5c9c8c4fe51d450bc9547ba1)
 * [一个专家眼中的Go与Java垃圾回收算法大对比](https://www.dushibaiyu.com/2016/12/java-go-gc.html)
+* [图解Golang的GC算法](https://mp.weixin.qq.com/s/_h0-8hma5y_FHKBeFuOOyw)
