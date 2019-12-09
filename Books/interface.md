@@ -161,7 +161,31 @@ func main() {
 ## Type switch
 还有一种方便的方法来判断 interface 变量的具体类型，那就是利用 switch 语句。如下所示：
 ```
-func Print(i interface{}) {
+package main
+
+import (
+	"fmt"
+)
+
+func classifier(items ...interface{}) {
+	for i, x := range items {
+		switch x.(type) {
+		case bool:
+			fmt.Printf("param #%d is a bool\n", i)
+		case float64:
+			fmt.Printf("param #%d is a float64\n", i)
+		case int, int64:
+			fmt.Printf("param #%d is an int\n", i)
+		case nil:
+			fmt.Printf("param #%d is nil\n", i)
+		case string:
+			fmt.Printf("param #%d is a string\n", i)
+		default:
+			fmt.Printf("param #%d’s type is unknown\n", i)
+		}
+	}
+}
+func print(i interface{}) {
 	switch i.(type) {
 	case string:
 		fmt.Printf("type is string,value is:%v\n", i.(string))
@@ -174,11 +198,12 @@ func Print(i interface{}) {
 func main() {
 	var i interface{}
 	i = "hello"
-	Print(i)
+	print(i)
 	i = 100
-	Print(i)
+	print(i)
 	i = 1.29
-	Print(i)
+	print(i)
+	classifier(1, '3', true)
 }
 ```
 灵活高效的 interface 动态类型,使 Go 语言在保持强静态类型的安全和高效的同时，也能灵活安全地在不同相容类型之间转换
