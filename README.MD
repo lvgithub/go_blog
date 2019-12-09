@@ -45,7 +45,12 @@
 * 分布式配置管理
 * 分布式id生成器
 * 延时任务系统
-
+* 文件读写
+* 文件拷贝
+* 用buffer读取文件
+* 用slice读取文件
+* 格式化JSON数据
+* 从 panic 中恢复（Recover）
 * Golang中的坑
 
 ## 文章
@@ -77,3 +82,7 @@
 * [新版本Golang的包管理入门教程](https://juejin.im/post/5c9c8c4fe51d450bc9547ba1)
 * [一个专家眼中的Go与Java垃圾回收算法大对比](https://www.dushibaiyu.com/2016/12/java-go-gc.html)
 * [图解Golang的GC算法](https://mp.weixin.qq.com/s/_h0-8hma5y_FHKBeFuOOyw)
+
+
+## 框架选择
+* [GoFrame 是一款模块化、高性能、生产级Go应用开发框架](https://github.com/gogf/gf/blob/master/README_ZH.MD)
