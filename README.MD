@@ -23,7 +23,7 @@
 * [深入理解 slice](./Books/slice.md)
 * [深入理解 Golang 指针](./Books/pointer.md)
 * [深入理解 interface](./Books/interface.md)
-
+* [通过 Once学习 Go 的内存模型](./Books/once.md)
 * [通过 深入对比 Arrays 和 Slices 学习GO](./Books/array_slice.md)
 * [为什么要使用 goroutines 取代 threads](./Books/goroutines.md)
 * [Go中两种声明变量方式，有什么区别？](./Books/variable.md)
@@ -41,12 +41,15 @@
 * Golang Socket编程
 * Golang WebSocket
 * Golang 熔断机制
+
 * 分布式锁
 * 分布式配置管理
 * 分布式id生成器
 * 延时任务系统
+
 * 文件读写
 * 文件拷贝
+
 * 用buffer读取文件
 * 用slice读取文件
 * 格式化JSON数据
