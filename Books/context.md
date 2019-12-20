@@ -56,16 +56,54 @@ func main() {
 	}
 }
 ```
+
+## 主要类型
+```
+// An emptyCtx is never canceled, has no values, and has no deadline. It is not
+// struct{}, since vars of this type must have distinct addresses.
+// 所有 ctx 的跟 ctx,不允许取消，没有值，不会超时
+// 使用 int 是因为每次申请新的 ctx 的时候， var 定义后，这个变量有唯一的地址
+// 不使用 struct{} 是因为 var struct 的初始值为 nil 
+type emptyCtx int
+
+// cancelCtx 是可以被去取消的，当被取消的时候，会通知所有子节点都发起取消操作
+type cancelCtx struct {
+	Context
+
+	mu       sync.Mutex            // protects following fields
+	done     chan struct{}         // created lazily, closed by first cancel call
+	children map[canceler]struct{} // set to nil by the first cancel call
+	err      error                 // set to non-nil by the first cancel call
+}
+
+// timerCtx 通过时间设置超时，有两种方式 func WithDeadline() 、func WithTimeout()
+type timerCtx struct {
+	cancelCtx
+	timer *time.Timer // Under cancelCtx.mu.
+
+	deadline time.Time
+}
+
+
+// valueCtx 通过key-value的方式携带值
+type valueCtx struct {
+	Context
+	key, val interface{}
+}
+```
+
+
 ## Context
 context 是一个接口,定义如下：[源码](https://golang.org/src/context/context.go#L62)
 ```
 type Context interface {
+	// 返回超时时间
 	Deadline() (deadline time.Time, ok bool)
-
+	// 取消操作的通信信道
 	Done() <-chan struct{}
 
 	Err() error
-
+	// goroutings 直接共享数据
 	Value(key interface{}) interface{}
 }
 ```
@@ -213,6 +251,7 @@ func (c *cancelCtx) cancel(removeFromParent bool, err error) {
 ```
 func propagateCancel(parent Context, child canceler) {
 	// 父节点是一个空节点,可以理解为本节点为根节点，不需要挂载
+	// 其实就是 backendCtx 
 	if parent.Done() == nil {
 		return // parent is never canceled
 	}
@@ -275,6 +314,38 @@ func parentCancelCtx(parent Context) (*cancelCtx, bool) {
 			return nil, false
 		}
 	}
+}
+```
+新版本,已经优化了本方法
+```
+// parentCancelCtx returns the underlying *cancelCtx for parent.
+// It does this by looking up parent.Value(&cancelCtxKey) to find
+// the innermost enclosing *cancelCtx and then checking whether
+// parent.Done() matches that *cancelCtx. (If not, the *cancelCtx
+// has been wrapped in a custom implementation providing a
+// different done channel, in which case we should not bypass it.)
+func parentCancelCtx(parent Context) (*cancelCtx, bool) {
+	done := parent.Done()
+	if done == closedchan || done == nil {
+		return nil, false
+	}
+	p, ok := parent.Value(&cancelCtxKey).(*cancelCtx)
+	if !ok {
+		return nil, false
+	}
+	p.mu.Lock()
+	ok = p.done == done
+	p.mu.Unlock()
+	if !ok {
+		return nil, false
+	}
+	return p, true
+}
+func (c *cancelCtx) Value(key interface{}) interface{} {
+	if key == &cancelCtxKey {
+		return c
+	}
+	return c.Context.Value(key)
 }
 ```
 ## timerCtx
